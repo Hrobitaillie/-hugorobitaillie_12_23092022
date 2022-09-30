@@ -1,0 +1,32 @@
+[
+    {
+      "id": 12,
+      "userInfos": {
+        "firstName": "Brandon",
+        "lastName": "Dovineau",
+        "age": 31
+      },
+      "todayScore": 0.23,
+      "keyData": {
+        "calorieCount": 1930,
+        "proteinCount": 155,
+        "carbohydrateCount": 290,
+        "lipidCount": 50
+      }
+    },
+    {
+      "id": 18,
+      "userInfos": {
+        "firstName": "Jacob",
+        "lastName": "Ratorez",
+        "age": 34
+      },
+      "score": 0.7,
+      "keyData": {
+        "calorieCount": 2500,
+        "proteinCount": 90,
+        "carbohydrateCount": 150,
+        "lipidCount": 120
+      }
+    }
+  ]
