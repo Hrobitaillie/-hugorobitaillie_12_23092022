@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root{
+    min-height: 100vh;
+}
+h1{
+    font-size: 40px;
+    font-weight: 500;
+}
+*{box-sizing: border-box;}
+.copyrightAside{
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+}
