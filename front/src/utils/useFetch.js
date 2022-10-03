@@ -8,6 +8,8 @@ const useFetch = (prop) => {
     const [loading, setLoading] = useState(true);
     
     // au chargement de la fonction récupérer les données
+    console.log(process.env.NODE_ENV);
+    
     useEffect(()=> {
         const fetchData = async () => {
             setLoading(true);

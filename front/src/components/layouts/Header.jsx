@@ -13,7 +13,7 @@ export default function Header(){
                 <nav className="w-full mx-[70px]" >
                     <ul className="flex w-full justify-between items-center flex-row h-full pl-7 text-[24px]">
                         <li>
-                            <Link to="/dashboard">Accueil</Link>
+                            <Link to="/">Accueil</Link>
                         </li>
                         <li>Profil</li>
                         <li>Réglages</li>
