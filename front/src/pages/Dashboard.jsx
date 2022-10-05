@@ -1,9 +1,7 @@
 import Aside from "@components/layouts/Aside";
 import DailyActivity from "@components/stats/DailyActivity";
-import useFetch from "@utils/useFetch";
 
 export default function Dashboard(){
-    const data = useFetch(import.meta.env.VITE_USER_PERFORMANCE);
 
     return(
         <div className="h-full flex">

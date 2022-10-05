@@ -3,21 +3,17 @@ import React, { useContext, useState } from 'react'
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import Header from './components/layouts/Header'
 import './index.css'
-import Login from './pages/Login'
 import Auth from './contexts/Auth'
 
 function App() {
-    const { isLogged, userId } = useContext(Auth);
-
-    console.log(userId);
+    const { userId } = useContext(Auth);
     return (
-    <Auth.Provider value={{isLogged, userId}}>
+    <Auth.Provider value={{userId}}>
         <React.StrictMode>
             <BrowserRouter>
                 <Header/>
                 <Routes>
-                    <Route path='/login' element={<Login/>}/>
-                    {isLogged ? (<Route path='/' element= {<Dashboard/>}/>):(<Route path='/' element= {<Navigate to="/login" />}/>)}
+                    <Route path='/' element= {<Dashboard/>}/>
                 </Routes>
             </BrowserRouter>
         </React.StrictMode>
