@@ -13,7 +13,8 @@ module.exports = {
         'pageContent' : 'calc(100% - 93px)'
       },
       colors:{
-        'SportSeeRed' : '#FF0101'
+        'SportSeeRed' : '#FF0101',
+        'light' : '#FBFBFB'
       }
       
     },
