@@ -1,4 +1,3 @@
-import useFetch from "@utils/useFetch";
 import {
   BarChart,
   Bar,
@@ -9,34 +8,53 @@ import {
   Legend,
   CartesianGrid,
 } from "recharts";
-import FactoryDailyActivity from "@utils/factory/FactoryDailyActivity";
 import CustomLegend from "./CustomLegend";
 import CustomTooltip from "./CustomTooltip";
-import { useState } from "react";
+import Loading from "@components/layouts/Loading";
+import Error from "@components/layouts/Error";
+import { useEffect, useState } from "react";
+import { DailyActivityFetching } from "@utils/useFetch";
 
 export default function DailyActivity() {
-  const { loading, error, data } = useFetch(import.meta.env.VITE_USER_ACTIVITY);
-
-  loading && <h1>Loading DATA ....</h1>;
-  error && console.log(error);
-
-  if (data) {
-    const dataMapped = FactoryDailyActivity(data.sessions);
-
+    const [isLoading, setLoading] = useState(true)
+    const [data, setData] = useState({})
+    const [error, setError] = useState(false)
+    const userId = 12
     const LabelStyle = {
       fontWeight: 500,
       fontSize: "14px",
       color: "#9B9EAC",
     };
+    
+    useEffect(()=>{
+        const getData = async () =>{
+            try{
+                const data = await DailyActivityFetching(userId)
+                setData(data)
+            } catch(error){
+                setError(true)
+            } finally {
+                setLoading(false)
+            }
+        } 
+        getData()
+    },[])
 
+    if (isLoading) {
+      return <Loading/>
+    }
+    if (error) {
+        return <Error/>
+    }
+    if (data) {
     return (
       <section
         id="dailyActivity"
-        className="w-full aspect-[167/64] bg-light p-[25px]"
+        className="w-full aspect-[167/64] bg-light p-[25px] rounded"
       >
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
-            data={dataMapped}
+            data={data}
             width="100%"
             height={147}
             barGap={8}

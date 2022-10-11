@@ -2,32 +2,51 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useEffect } from "react";
 import Auth from "@contexts/Auth";
+import { getUserFirstname, FormatUserKeyData } from "@utils/factory/FactoryUserInfos";
+import FactoryDailyActivity from "./factory/FactoryDailyActivity";
+import FactoryAverageSessions from "./factory/FactoryAverageSessions";
 
-const useFetch = (prop) => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+const errorDetected = (error) =>{
+  console.log("An error as expected", error);
+}
+export async function DailyActivityFetching(userid){
+  try{
+  const response = await axios.get(import.meta.env.VITE_API_URL + userid + "/USER_ACTIVITY.json")
+  const data = response.data
 
-  const { userId } = useContext(Auth);
-  const url = import.meta.env.VITE_API_URL + userId + "/" + prop;
+  const formatedData = FactoryDailyActivity(data.sessions)
 
-  // au chargement de la fonction récupérer les données
-  useEffect(() => {
-    console.log(url);
-    setLoading(true);
-    axios
-      .get(url)
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((err) => {
-        setError(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [url]);
-  return { loading, error, data };
-};
+  return formatedData
+  } catch(error){
+    errorDetected(error)
+  }
+}
 
-export default useFetch;
+export async function AverageSessionFetching(userid){
+  try{
+  const response = await axios.get(import.meta.env.VITE_API_URL + userid + "/USER_AVERAGE_SESSION.json")
+  const data = response.data
+
+  const formatedData = FactoryAverageSessions(data)
+
+  return formatedData
+  } catch(error){
+    errorDetected(error)
+  }
+}
+export default async function dashboardDataFetching(userid){
+    try{
+    const response = await axios.get(import.meta.env.VITE_API_URL + userid + "/USER_Main_DATA.json")
+    const data = response.data
+
+    const firstname = getUserFirstname(data)
+    const keyData = FormatUserKeyData(data)
+
+    return{
+      'firstname': firstname, 
+      'keyData': keyData
+      }
+    } catch(error){
+      errorDetected(error)
+    }
+}
