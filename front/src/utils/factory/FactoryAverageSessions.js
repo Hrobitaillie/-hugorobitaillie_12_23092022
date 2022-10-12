@@ -7,7 +7,7 @@ export default function FactoryAverageSessions(data){
             case 1:
                 return "Lu";
             case 2:
-                return "Ma";
+                return "M";
             case 3:
                 return "M";
             case 4:
