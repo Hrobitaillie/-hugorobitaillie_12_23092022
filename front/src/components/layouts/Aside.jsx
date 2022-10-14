@@ -1,6 +1,6 @@
 export default function Aside(){
     return(
-        <aside className="wl:h-[calc(100vh-93px)] h-[calc(100vh-66.27px)] fixed left-0 xl:top-[93px] top-[66.27px] text-white bg-black py-[60px] px-[10px] xl:w-[117px] w-[60px] flex flex-col justify-end items-center gap-[2rem]">
+        <aside className="xl:h-[calc(100vh-93px)] h-[calc(100vh-66.27px)] fixed left-0 xl:top-[93px] top-[66.27px] text-white bg-black py-[60px] px-[10px] xl:w-[117px] w-[60px] flex flex-col justify-end items-center gap-[2rem]">
             <nav className="">
                 <ul className="flex flex-col gap-4">
                     <li>

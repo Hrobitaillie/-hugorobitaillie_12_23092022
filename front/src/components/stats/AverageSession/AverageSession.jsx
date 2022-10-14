@@ -11,11 +11,12 @@ import {
   YAxis,
 } from "recharts";
 
-export default function AverageSession() {
+export default function AverageSession( { id }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
-  const userId = 12;
+  const userId = id;
+
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -65,10 +66,8 @@ export default function AverageSession() {
       const lineChartWidth = lineChart.clientWidth;
       const colorStopPourcentage =
         (e.activeCoordinate.x / lineChartWidth) * 100;
-      console.log(colorStopPourcentage);
       durationSessionsChart.style.backgroundImage = `linear-gradient(90deg, rgba(255, 0, 0, 1) ${colorStopPourcentage}%, rgba(0, 0, 0, .1) ${colorStopPourcentage}%, rgba(0, 0, 0, .1) 100%)`;
     } else {
-      console.log("null");
       durationSessionsChart.style.backgroundImage = null;
     }
   };
@@ -79,7 +78,7 @@ export default function AverageSession() {
         const data = await AverageSessionFetching(userId);
         setData(data);
       } catch (error) {
-        setError(true);
+        setError(error);
       } finally {
         setLoading(false);
       }
@@ -91,14 +90,13 @@ export default function AverageSession() {
     return <Loading />;
   }
   if (error) {
-    return <Error />;
+    return <Error error={error}/>;
   }
   if (data) {
-    console.log(data);
     return (
       <section
         id="averageSessions"
-        className="duration-sessions-chart w-[calc((100%-4rem)/3)] aspect-square bg-SportSeeRed rounded"
+        className="duration-sessions-chart w-[calc((100%-4rem)/3)] aspect-square bg-SportSeeRed rounded flex flex-col justify-between"
       >
         <p className=" p-8 text-white opacity-50">Durée moyenne des sessions</p>
         <ResponsiveContainer height="60%">

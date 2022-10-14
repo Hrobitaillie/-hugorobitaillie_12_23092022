@@ -14,7 +14,8 @@ module.exports = {
       },
       colors:{
         'SportSeeRed' : '#FF0101',
-        'light' : '#FBFBFB'
+        'light' : '#FBFBFB',
+        'SportSeeBlack': '#282D30'
       }
       
     },

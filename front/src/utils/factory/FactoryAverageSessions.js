@@ -1,7 +1,6 @@
 export default function FactoryAverageSessions(data){
 
     const sessionsData = data.sessions;
-    console.log(sessionsData);
     const formatDate = (index) => {
         switch (index) {
             case 1:

@@ -1,15 +1,15 @@
 {
   "id": 18,
   "userInfos": {
-    "firstName": "Jacob",
-    "lastName": "Ratorez",
+    "firstName": "Jack",
+    "lastName": "Séparou",
     "age": 34
   },
   "score": 0.7,
   "keyData": {
-    "calorieCount": 2500,
-    "proteinCount": 90,
-    "carbohydrateCount": 150,
-    "lipidCount": 120
+    "calorieCount": 2820,
+    "proteinCount": 178,
+    "carbohydrateCount": 180,
+    "lipidCount": 10
   }
 }

@@ -15,11 +15,11 @@ import Error from "@components/layouts/Error";
 import { useEffect, useState } from "react";
 import { DailyActivityFetching } from "@utils/useFetch";
 
-export default function DailyActivity() {
+export default function DailyActivity({ id }) {
     const [isLoading, setLoading] = useState(true)
     const [data, setData] = useState({})
     const [error, setError] = useState(false)
-    const userId = 12
+    const userId = id;
     const LabelStyle = {
       fontWeight: 500,
       fontSize: "14px",
@@ -32,7 +32,7 @@ export default function DailyActivity() {
                 const data = await DailyActivityFetching(userId)
                 setData(data)
             } catch(error){
-                setError(true)
+                setError(error)
             } finally {
                 setLoading(false)
             }
@@ -44,7 +44,7 @@ export default function DailyActivity() {
       return <Loading/>
     }
     if (error) {
-        return <Error/>
+        return <Error error={error}/>
     }
     if (data) {
     return (

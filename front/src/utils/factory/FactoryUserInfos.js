@@ -3,7 +3,11 @@ export default function getUserId(data){
     return UserId
 }
 export function getUserScore(data){
-    const UserScore = data.score
+    const UserScore = [{
+        value: data.score * 100,
+        fill: "#FF0000",
+        name: "Score",
+      }];
     return UserScore
 }
 export function getUserAge(data){
