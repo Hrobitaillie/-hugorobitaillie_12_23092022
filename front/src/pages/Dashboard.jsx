@@ -4,45 +4,30 @@ import MainHeroSection from "@components/layouts/MainHeroSection";
 import Loading from "@components/layouts/Loading";
 import Error from "@components/layouts/Error";
 import BlockKeyData from "@components/stats/BlockKeyData/BlockKeyData";
-import { useEffect, useState } from "react";
-import dashboardDailyActivityFetching from "@utils/useFetch";
+import { useContext, useEffect, useState } from "react";
+import DashboardDataFetching from "@utils/useFetch";
 import AverageSession from "@components/stats/AverageSession/AverageSession";
 import Performances from "@components/stats/Activities/Performances";
 import Score from "@components/stats/Score/Score";
+import { useQuery} from "react-query";
+import Auth from "@contexts/Auth";
 
 export default function Dashboard() {
-  const [isLoading, setLoading] = useState(true);
-  const [firstname, setFirstname] = useState();
-  const [keyData, setkeyData] = useState();
-  const [score, setScore] = useState();
-  const [error, setError] = useState(false);
-  const userId = 18;
+  const { userId } = useContext(Auth);
   const classMain =
     "xl:px-[107px] xl:py-[70px] xl:pl-[calc(107px+117px)] xl:pt-[calc(70px+93px)] px-[50px] py-[30px] pl-[calc(50px+60px)] pt-[calc(30px+93px)] w-full";
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const data = await dashboardDailyActivityFetching(userId);
-        setFirstname(data.firstname);
-        setkeyData(data.keyData);
-        setScore(data.score);
-      } catch (error) {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-    getData();
-  }, []);
+  const { isLoading, data, error } = useQuery("users", ()=> DashboardDataFetching(userId))
+  const users = data
 
   if (isLoading) {
     return <Loading />;
-  }
-  if (error) {
-    return <Error />;
-  }
-  if (firstname) {
+  }else if (error) {
+    return <Error error={error}/>;
+  }else {
+    const firstname = data.firstname
+    const score = data.score
+    const keyData = data.keyData
+
     return (
       <div className="h-full flex">
         <Aside />

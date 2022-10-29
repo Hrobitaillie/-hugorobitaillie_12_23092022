@@ -3,27 +3,13 @@ import Error from "@components/layouts/Error";
 import Loading from "@components/layouts/Loading";
 import { PerformancesFetching } from "@utils/useFetch";
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer } from "recharts";
+import { useQuery } from "react-query";
+import { PropTypes } from "prop-types";
 
 export default function Performances({id}){
 
-    const [isLoading, setLoading] = useState(true);
-    const [data, setData] = useState([]);
-    const [error, setError] = useState(false);
     const userId = id;
-
-    useEffect(() => {
-      const getData = async () => {
-        try {
-          const data = await PerformancesFetching(userId);
-          setData(data);
-        } catch (error) {
-          setError(error);
-        } finally {
-          setLoading(false);
-        }
-      };
-      getData();
-    }, []);
+    const { isLoading, data, error } = useQuery("performance", ()=> PerformancesFetching(userId))
   
     if (isLoading) {
       return <Loading />;
@@ -47,4 +33,7 @@ export default function Performances({id}){
         </section>
         )
     }
+}
+Performances.propTypes = {
+  id: PropTypes.number.isRequired
 }

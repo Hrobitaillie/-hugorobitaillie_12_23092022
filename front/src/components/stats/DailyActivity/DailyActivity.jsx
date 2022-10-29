@@ -14,39 +14,24 @@ import Loading from "@components/layouts/Loading";
 import Error from "@components/layouts/Error";
 import { useEffect, useState } from "react";
 import { DailyActivityFetching } from "@utils/useFetch";
+import { useQuery } from "react-query";
 
 export default function DailyActivity({ id }) {
-    const [isLoading, setLoading] = useState(true)
-    const [data, setData] = useState({})
-    const [error, setError] = useState(false)
-    const userId = id;
-    const LabelStyle = {
-      fontWeight: 500,
-      fontSize: "14px",
-      color: "#9B9EAC",
-    };
-    
-    useEffect(()=>{
-        const getData = async () =>{
-            try{
-                const data = await DailyActivityFetching(userId)
-                setData(data)
-            } catch(error){
-                setError(error)
-            } finally {
-                setLoading(false)
-            }
-        } 
-        getData()
-    },[])
+  const userId = id;
+  const LabelStyle = {
+    fontWeight: 500,
+    fontSize: "14px",
+    color: "#9B9EAC",
+  }; 
+  const { isLoading, data, error } = useQuery("dailyActivity", ()=> DailyActivityFetching(userId))
 
-    if (isLoading) {
-      return <Loading/>
-    }
-    if (error) {
-        return <Error error={error}/>
-    }
-    if (data) {
+  if (isLoading) {
+    return <Loading/>
+  }
+  if (error) {
+      return <Error error={error}/>
+  }
+  if (data) {
     return (
       <section
         id="dailyActivity"

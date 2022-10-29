@@ -10,14 +10,12 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useQuery } from "react-query";
 
 export default function AverageSession( { id }) {
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(false);
   const userId = id;
-
-
+  const { isLoading, data, error } = useQuery("averageSession", ()=> AverageSessionFetching(userId))
+  
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
@@ -29,7 +27,6 @@ export default function AverageSession( { id }) {
 
     return null;
   };
-
   const CustomizedDot = (props) => {
     const { cx, cy } = props;
     return (
@@ -53,7 +50,6 @@ export default function AverageSession( { id }) {
       </svg>
     );
   };
-
   const displayCustomCursor = (e) => {
     const durationSessionsChart = document.querySelector(
       ".duration-sessions-chart"
@@ -71,20 +67,6 @@ export default function AverageSession( { id }) {
       durationSessionsChart.style.backgroundImage = null;
     }
   };
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const data = await AverageSessionFetching(userId);
-        setData(data);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    getData();
-  }, []);
 
   if (isLoading) {
     return <Loading />;
