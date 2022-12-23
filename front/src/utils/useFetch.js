@@ -1,13 +1,9 @@
 import axios from "axios";
-import { useContext, useState } from "react";
-import { useEffect } from "react";
-import Auth from "@contexts/Auth";
 import { getUserFirstname, FormatUserKeyData } from "@utils/factory/FactoryUserInfos";
 import FactoryDailyActivity from "./factory/FactoryDailyActivity";
 import FactoryAverageSessions from "./factory/FactoryAverageSessions";
 import FactoryPerformances from "./factory/FactoryPerformances";
 import { getUserScore } from "./factory/FactoryUserInfos";
-import { PropTypes } from "prop-types";
 
 const errorDetected = (error) =>{
   console.log("An error as expected", error);
@@ -15,16 +11,14 @@ const errorDetected = (error) =>{
 
 export async function DailyActivityFetching(userid){
   try{
-  const response = await axios.get(import.meta.env.VITE_API_URL + userid + "/USER_ACTIVITY.json")
-  const data = response.data
+  const { data:{ sessions } } = await axios.get(import.meta.env.VITE_API_URL + userid + "/USER_ACTIVITY.json")
 
-  const formatedData = FactoryDailyActivity(data.sessions)
-
-  return formatedData
+  return FactoryDailyActivity(sessions)
   } catch(error){
     errorDetected(error)
   }
 }
+
 export async function AverageSessionFetching(userid){
   try{
   const response = await axios.get(import.meta.env.VITE_API_URL + userid + "/USER_AVERAGE_SESSION.json")
@@ -66,20 +60,4 @@ export default async function DashboardDataFetching(userid){
     } catch(error){
       errorDetected(error)
     }
-}
-
-DailyActivityFetching.propTypes = {
-  id: PropTypes.number.isRequired
-}
-
-AverageSessionFetching.propTypes = {
-  id: PropTypes.number.isRequired
-}
-
-PerformancesFetching.propTypes = {
-  id: PropTypes.number.isRequired
-}
-
-DashboardDataFetching.propTypes = {
-  id: PropTypes.number.isRequired
 }

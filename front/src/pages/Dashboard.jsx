@@ -38,7 +38,7 @@ export default function Dashboard() {
               <DailyActivity id={userId}/>
               <AverageSession id={userId}/>
               <Performances id={userId}/>
-              <Score id={userId} score={score}/>
+              <Score score={score}/>
             </div>
             <div className="xl:w-[calc((100%-2rem)/4)] flex xl:flex-col justify-between">
               {keyData.map((data, index) => {

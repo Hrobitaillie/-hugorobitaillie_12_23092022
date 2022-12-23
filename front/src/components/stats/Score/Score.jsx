@@ -1,8 +1,16 @@
+import { PropTypes } from "prop-types";
 import { PolarAngleAxis, RadialBar, RadialBarChart, ResponsiveContainer } from "recharts";
+import FactoryScore from "@utils/factory/FactoryScore";
 
-export default function Score({ id, score }) {
-  let scoreValue = 0;
-  scoreValue = Math.ceil(score[0].value)
+/** 
+ * Display Score graph.
+ * 
+ * @param { array } score - The user's score
+ * 
+ * @returns { React.ReactElement } The Score component
+ */
+export default function Score({ score }) {
+  let scoreValue = FactoryScore(score)
 
   return (
     <section
@@ -52,4 +60,7 @@ export default function Score({ id, score }) {
         </ResponsiveContainer>
     </section>
   );
+}
+Score.propTypes = {
+    score: PropTypes.array.isRequired
 }

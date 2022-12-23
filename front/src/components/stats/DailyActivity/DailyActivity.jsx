@@ -12,17 +12,23 @@ import CustomLegend from "./CustomLegend";
 import CustomTooltip from "./CustomTooltip";
 import Loading from "@components/layouts/Loading";
 import Error from "@components/layouts/Error";
-import { useEffect, useState } from "react";
 import { DailyActivityFetching } from "@utils/useFetch";
 import { useQuery } from "react-query";
+import { PropTypes } from "prop-types";
+import { LabelStyle } from "./customStyles";
 
+
+/** 
+ * Display DailyActivity graph.
+ * 
+ * @param { number } id - The user's ID
+ * 
+ * @returns { React.ReactElement } The DailyActivity component
+ */
 export default function DailyActivity({ id }) {
   const userId = id;
-  const LabelStyle = {
-    fontWeight: 500,
-    fontSize: "14px",
-    color: "#9B9EAC",
-  }; 
+
+  
   const { isLoading, data, error } = useQuery("dailyActivity", ()=> DailyActivityFetching(userId))
 
   if (isLoading) {
@@ -101,4 +107,9 @@ export default function DailyActivity({ id }) {
       </section>
     );
   }
+}
+
+CustomTooltip.propTypes = {
+  id: PropTypes.number
+
 }

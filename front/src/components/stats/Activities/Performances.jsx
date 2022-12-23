@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Error from "@components/layouts/Error";
 import Loading from "@components/layouts/Loading";
 import { PerformancesFetching } from "@utils/useFetch";
@@ -6,8 +5,15 @@ import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Responsi
 import { useQuery } from "react-query";
 import { PropTypes } from "prop-types";
 
-export default function Performances({id}){
+/**
+ * Display Performances graph.
+ * 
+ * @param { number } id - The user's ID
+ * 
+ * @returns { React.ReactElement } The Performances component
+ */
 
+export default function Performances({id}){
     const userId = id;
     const { isLoading, data, error } = useQuery("performance", ()=> PerformancesFetching(userId))
   

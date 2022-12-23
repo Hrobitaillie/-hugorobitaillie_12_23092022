@@ -1,4 +1,15 @@
-const CustomTooltip = ({ active, payload, label }) => {
+import { PropTypes } from "prop-types";
+
+/** 
+ * Display customized tooltip in the daily activity graph.
+ * 
+ * @param { boolean } active - The state of "if displayed" or not
+ * @param { array } payload - The graph's content at the mouse position
+ * 
+ * @returns { React.ReactElement } The CustomTooltip component
+ */
+
+const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
         const tooltipStyle = {
             width: "39px",
@@ -30,3 +41,8 @@ const CustomTooltip = ({ active, payload, label }) => {
   };
 
   export default CustomTooltip
+
+  CustomTooltip.propTypes = {
+    active: PropTypes.bool,
+    payload: PropTypes.array,
+  }

@@ -1,3 +1,13 @@
+import { PropTypes } from "prop-types";
+
+/**
+ * Display the 4th block of user key data.
+ * 
+ * @param { Objects } data - all key data informations
+ * 
+ * @returns { React.ReactElement } The BlockKeyData component
+ */
+
 export default function BlockKeyData({ data }){
     return(
         <section id="KeyDatas" className="xl:w-full min-w-[200px] aspect-[129/62] bg-light xl:p-8 p-4 rounded flex items-center xl:gap-6 gap-4">
@@ -8,4 +18,9 @@ export default function BlockKeyData({ data }){
             </div>
         </section>
     )
+}
+
+BlockKeyData.propTypes = {
+    data: PropTypes.object.isRequired
+  
 }

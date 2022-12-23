@@ -1,33 +1,15 @@
-const CustomLegend = (props) => {
-  const { payload } = props;
-  const BulletStyle = (entry) => {
-    return {
-      width: 8,
-      height: 8,
-      borderRadius: 10,
-      backgroundColor: entry.color,
-    };
-  };
-  const ListStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: "32px"
-  };
-  const ListElementStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    fontWeight: "500",
-    fontSize: "14px"
-  };
-  const ContainerStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "calc(100% + 10px )",
-    marginBottom:"50px",
-    paddingLeft:"30px"
-  }
+import { PropTypes } from "prop-types";
+import { BulletStyle, ContainerStyle, ListElementStyle, ListStyle } from "./customStyles";
+
+/**
+ * Display customized legend on top of daily activity graph.
+ * 
+ * @param { array } payload - The graph's content at the mouse position
+ * 
+ * @returns { React.ReactElement } The CustomLegend component
+ */
+
+const CustomLegend = ( { payload } ) => {
 
   return (
     <div style={ContainerStyle}>
@@ -45,3 +27,8 @@ const CustomLegend = (props) => {
 };
 
 export default CustomLegend;
+
+
+CustomLegend.propTypes = {
+  payload: PropTypes.array.isRequired
+}

@@ -11,62 +11,22 @@ import {
   YAxis,
 } from "recharts";
 import { useQuery } from "react-query";
+import { PropTypes } from "prop-types";
+import CustomTooltip from "./CustomTooltip";
+import CustomizedDot from "./CustomizedDot";
+import { displayCustomCursor } from "./displayCustomCursor";
+
+/**
+ * Display Average Session graph.
+ * 
+ * @param { number } id - The user's ID
+ * 
+ * @returns { React.ReactElement } The AverageSession component
+ */
 
 export default function AverageSession( { id }) {
   const userId = id;
   const { isLoading, data, error } = useQuery("averageSession", ()=> AverageSessionFetching(userId))
-  
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className=" bg-white p-2">
-          <p className="label">{`${payload[0].value} min`}</p>
-        </div>
-      );
-    }
-
-    return null;
-  };
-  const CustomizedDot = (props) => {
-    const { cx, cy } = props;
-    return (
-      <svg
-        x={cx - 10}
-        y={cy - 10}
-        width={20}
-        height={20}
-        fill="white"
-        viewBox="0 0 18 17.95"
-      >
-        <path
-          className="cls-1"
-          d="M9,15.45c3.58,0,6.5-2.88,6.5-6.48s-2.92-6.48-6.5-6.48S2.5,5.38,2.5,8.98s2.92,6.48,6.5,6.48Z"
-          fill="rgba(255, 255, 255, 0.2)"
-        />
-        <path
-          className="cls-2"
-          d="M9,12.95c2.21,0,4-1.78,4-3.98s-1.79-3.98-4-3.98-4,1.78-4,3.98,1.79,3.98,4,3.98Z"
-        />
-      </svg>
-    );
-  };
-  const displayCustomCursor = (e) => {
-    const durationSessionsChart = document.querySelector(
-      ".duration-sessions-chart"
-    );
-
-    if (e.isTooltipActive === true) {
-      const lineChart = document.querySelector(
-        ".duration-sessions-chart__line-chart"
-      );
-      const lineChartWidth = lineChart.clientWidth;
-      const colorStopPourcentage =
-        (e.activeCoordinate.x / lineChartWidth) * 100;
-      durationSessionsChart.style.backgroundImage = `linear-gradient(90deg, rgba(255, 0, 0, 1) ${colorStopPourcentage}%, rgba(0, 0, 0, .1) ${colorStopPourcentage}%, rgba(0, 0, 0, .1) 100%)`;
-    } else {
-      durationSessionsChart.style.backgroundImage = null;
-    }
-  };
 
   if (isLoading) {
     return <Loading />;
@@ -108,13 +68,6 @@ export default function AverageSession( { id }) {
               hide={true}
             />
             <Tooltip
-              //   cursor={{
-              //     strokeWidth: "8000px",
-              //     strokeOpacity: 0.1,
-              //     strokeLinecap: "square",
-              //     stroke: "#000000",
-              //     style: { transform: "translateX(4000px)",height:"50px"},
-              //   }}
               cursor={false}
               content={<CustomTooltip />}
             />
@@ -137,4 +90,9 @@ export default function AverageSession( { id }) {
       </section>
     );
   }
+}
+
+AverageSession.propTypes = {
+  id: PropTypes.number
+
 }

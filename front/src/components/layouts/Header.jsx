@@ -1,6 +1,12 @@
+
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
+/**
+ * Display header.
+ * 
+ * @returns { React.ReactElement } The header component
+ */
 export default function Header(){
     return(
         <Fragment>

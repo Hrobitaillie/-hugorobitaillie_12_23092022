@@ -1,8 +1,13 @@
 import { getUserFirstname } from "@utils/factory/FactoryUserInfos";
-import useFetch from "@utils/useFetch";
-import Error from "./Error";
-import Loading from "./Loading";
 
+import { PropTypes } from "prop-types";
+
+/**
+ * Display header.
+ * 
+ * @param { string } name - The user's firstname
+ * @returns { React.ReactElement } The header component
+ */
 export default function MainHeroSection({ name }){
     return(
         <div>
@@ -10,4 +15,8 @@ export default function MainHeroSection({ name }){
             <p className="pt-[20px]">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
         </div>
     )
+}
+
+MainHeroSection.propTypes = {
+    name: PropTypes.string.isRequired
 }
