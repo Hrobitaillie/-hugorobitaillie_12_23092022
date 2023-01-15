@@ -11,22 +11,22 @@ export default function Aside(){
                 <ul className="flex flex-col gap-4">
                     <li>
                         <a href="">
-                            <img src="./src/assets/img/pictos/yoga.svg" alt="yoga" />
+                            <img src="/src/assets/img/pictos/yoga.svg" alt="yoga" />
                         </a>
                     </li>
                     <li>
                         <a href="">
-                            <img src="./src/assets/img/pictos/swim.svg" alt="swim" />
+                            <img src="/src/assets/img/pictos/swim.svg" alt="swim" />
                         </a>
                     </li>
                     <li>
                         <a href="">
-                            <img src="./src/assets/img/pictos/bicycle.svg" alt="bicycle" />
+                            <img src="/src/assets/img/pictos/bicycle.svg" alt="bicycle" />
                         </a>
                     </li>
                     <li>
                         <a href="">
-                            <img src="./src/assets/img/pictos/gym.svg" alt="gym" />
+                            <img src="/src/assets/img/pictos/gym.svg" alt="gym" />
                         </a>
                     </li>
                 </ul>

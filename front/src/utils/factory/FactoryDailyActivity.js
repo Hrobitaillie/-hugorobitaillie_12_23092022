@@ -9,7 +9,6 @@
  */
 
 export default function FactoryDailyActivity(data){
-    console.log(data);
     const newData = data.map(({ day, kilogram, calories }) => (
         {
             day:parseInt(day.substring(8)),

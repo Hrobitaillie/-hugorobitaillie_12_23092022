@@ -1,27 +1,38 @@
-export default function getUserId(data){
-    const UserId = data.id
-    return UserId
-}
+/** 
+ * Get user today score and format the data to be displayed
+ * 
+ * @param { array } data - score data that will be formated
+ * 
+ * @returns { array } UserScore
+ */
 export function getUserScore(data){
     const UserScore = [{
-        value: data.score * 100,
+        value: data.todayScore * 100,
         fill: "#FF0000",
         name: "Score",
       }];
     return UserScore
 }
-export function getUserAge(data){
-    const UserAge = data.userInfos.age
-    return UserAge
-}
+
+/** 
+ * Get user firstname and format it to be displayed
+ * 
+ * @param { array } data - data where user firstname is stored
+ * 
+ * @returns { string } UserFirstname
+ */
 export function getUserFirstname(data){
     const UserFirstname = data.userInfos.firstName.charAt(0).toUpperCase() + data.userInfos.firstName.slice(1);
     return UserFirstname
 }
-export function getUserLastName(data){
-    const LastName = data.userInfos.lastName.charAt(0).toUpperCase() + data.userInfos.lastName.slice(1);
-    return LastName
-}
+
+/** 
+ * Get user key data and format it to be displayed
+ * 
+ * @param { array } data - data where user keys are stored
+ * 
+ * @returns { array } SortedKeyData
+ */
 export function FormatUserKeyData(data){
     const UserKeyData = data.keyData
     const SortedKeyData = Object.entries(UserKeyData).map((key) =>{

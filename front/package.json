@@ -4,21 +4,19 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "dev:mockup": "NODE_ENV=dev:mockup vite"
+    "dev": "vite",
+    "prod": "SET NODE_ENV=production & vite"
   },
   "dependencies": {
     "axios": "^0.27.2",
     "create-react-app": "^5.0.1",
-    "nodemon": "^2.0.20",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.2",
-    "recharts": "^2.1.14",
-    "vite-plugin-restart": "^0.2.0"
+    "recharts": "^2.1.14"
   },
   "devDependencies": {
     "@headlessui/react": "^1.7.2",

@@ -4,21 +4,27 @@ import MainHeroSection from "@components/layouts/MainHeroSection";
 import Loading from "@components/layouts/Loading";
 import Error from "@components/layouts/Error";
 import BlockKeyData from "@components/stats/BlockKeyData/BlockKeyData";
-import { useContext, useEffect, useState } from "react";
 import DashboardDataFetching from "@utils/useFetch";
 import AverageSession from "@components/stats/AverageSession/AverageSession";
 import Performances from "@components/stats/Activities/Performances";
 import Score from "@components/stats/Score/Score";
 import { useQuery} from "react-query";
-import Auth from "@contexts/Auth";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Dashboard() {
-  const { userId } = useContext(Auth);
   const classMain =
     "xl:px-[107px] xl:py-[70px] xl:pl-[calc(107px+117px)] xl:pt-[calc(70px+93px)] px-[50px] py-[30px] pl-[calc(50px+60px)] pt-[calc(30px+93px)] w-full";
-  const { isLoading, data, error } = useQuery("users", ()=> DashboardDataFetching(userId))
-  const users = data
 
+  let { userId } = useParams();
+  userId = parseInt(userId, 10)
+  
+  useEffect(()=>{
+    return ()=> remove()
+  },[])
+  const { isLoading, data, error, remove } = useQuery("users", ()=> DashboardDataFetching(userId))
+  const users = data || {"data": []}
+  
   if (isLoading) {
     return <Loading />;
   }else if (error) {
@@ -27,6 +33,7 @@ export default function Dashboard() {
     const firstname = data.firstname
     const score = data.score
     const keyData = data.keyData
+
 
     return (
       <div className="h-full flex">

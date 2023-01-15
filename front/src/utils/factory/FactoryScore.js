@@ -6,9 +6,8 @@
  * @returns { number } scoreValue
  */
 export default function FactoryScore(data){
-    console.log(data);
     let scoreValue = 0;
     scoreValue = Math.ceil(data[0].value)
-
+    
     return scoreValue
 }

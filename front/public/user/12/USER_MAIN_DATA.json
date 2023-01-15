@@ -5,7 +5,7 @@
     "lastName": "Lupitor",
     "age": 24
   },
-  "score": 0.5,
+  "todayScore": 0.5,
   "keyData": {
     "calorieCount": 3500,
     "proteinCount": 124,
